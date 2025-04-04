@@ -1,6 +1,7 @@
 # file_io.py
 import csv
 import os
+import time
 from datetime import date
 from config import *
 
