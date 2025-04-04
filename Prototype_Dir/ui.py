@@ -1,6 +1,7 @@
 # ui.py
 import time
 from datetime import datetime, timedelta
+from config import DEFAULT_COUNT_STOP
 
 class UI:
     def __init__(self, lcd):
