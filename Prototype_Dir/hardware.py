@@ -40,9 +40,12 @@ class Hardware:
             relay.off()
 
     def close(self):
-        """Clean up all hardware resources."""
-        self.cleanup()
-        if self.reader_exists:
-            self.reader.READER.spi.close()
-            del self.reader
-        self.lcd.clear()
+        try:
+            self.cleanup()
+            if hasattr(self, 'reader') and self.reader is not None:  # Check if reader exists
+                self.reader.READER.spi.close()
+                del self.reader
+                self.reader_exists = False
+            self.lcd.clear()
+        except Exception as e:
+            print(f"Close failed: {e}")
