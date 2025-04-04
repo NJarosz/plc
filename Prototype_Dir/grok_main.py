@@ -10,7 +10,7 @@ from ui import UI
 from utils import write_card  # Importing from utils.py as requested
 from config import *
 
-def potential_reboot():
+def potential_reboot(boot_time):
     print("Checking for reboot...")
     timenow = datetime.now()
     if timenow > boot_time + timedelta(seconds=REBOOT_WAIT_SECONDS) and timenow.hour == REBOOT_HOUR:
@@ -166,7 +166,7 @@ def main():
 
                     if mode == MODES["standby"] and datetime.now() >= last_load_time + timedelta(seconds=RELOAD_SECONDS):
                         print("Checking reload conditions...")
-                        potential_reboot()
+                        potential_reboot(boot_time)
                         if get_file_modify_time(PRODUCTION_INFO_FILE) != production_file_modify_time:
                             print("Production file changed. Reloading...")
                             exit_and_reload()
