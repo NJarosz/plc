@@ -6,7 +6,7 @@ from datetime import datetime, timedelta, date
 from hardware import Hardware
 from sequence import create_sequence, evaluate_sequence, run_sequence
 from file_io import load_employee_list, update_csv, add_timestamp, read_total_count, update_total_count, \
-    get_file_modify_time
+    get_file_modify_time, read_production_info
 from ui import UI
 from utils import write_card
 from config import *
