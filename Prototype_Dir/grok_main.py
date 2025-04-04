@@ -21,7 +21,7 @@ def potential_reboot(boot_time):
     else:
         print("No reboot needed.")
 
-def exit_and_reload():
+def exit_and_reload(ui):
     print("Exiting and reloading...")
     ui.clear()
     ui.message("Reloading ...", 1)
@@ -142,7 +142,7 @@ def main():
                             mode = MODES["error"]
                             break
 
-                    if hw.button_1.is_pressed:  # Changed from button1
+                    if hw.button_1.is_pressed:
                         print("Button 1 pressed.")
                         ui.message("Hold 3 sec>>Menu", 1)
                         button_press_time = datetime.now()
@@ -151,7 +151,7 @@ def main():
                             mode = MODES["menu"]
                             print("Switched to menu mode.")
 
-                    if mode == MODES["standby"] and hw.button_2.is_pressed:  # Changed from button2
+                    if hw.button_2.is_pressed:
                         print("Button 2 pressed.")
                         ui.message("Hold 3 sec>>Load", 1)
                         button_press_time = datetime.now()
@@ -159,17 +159,17 @@ def main():
                         if datetime.now() >= button_press_time + timedelta(seconds=8):
                             print("Writing card and reloading...")
                             write_card(hw, ui)
-                            exit_and_reload()
+                            exit_and_reload(ui)
                         elif datetime.now() >= button_press_time + timedelta(seconds=2.5):
                             print("Reloading...")
-                            exit_and_reload()
+                            exit_and_reload(ui)
 
                     if mode == MODES["standby"] and datetime.now() >= last_load_time + timedelta(seconds=RELOAD_SECONDS):
                         print("Checking reload conditions...")
                         potential_reboot(boot_time)
                         if get_file_modify_time(PRODUCTION_INFO_FILE) != production_file_modify_time:
                             print("Production file changed. Reloading...")
-                            exit_and_reload()
+                            exit_and_reload(ui)
                         last_load_time = datetime.now()
 
             elif mode == MODES["menu"]:
