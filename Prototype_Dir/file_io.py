@@ -36,9 +36,9 @@ def read_production_info(filename=PRODUCTION_INFO_FILE):
                     key = key.lower()
                     if key == "part":
                         part = value.upper()
-                    elif key == "mach":
+                    elif key == "machine":
                         machine = value.upper()
-                    elif key == "count_goal":
+                    elif key == "count_stop":
                         count_stop = int(value) if value.isdigit() else count_stop
     except:
         pass
