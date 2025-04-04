@@ -1,6 +1,6 @@
 # hardware.py
 from gpiozero import OutputDevice, Button
-from .. import I2C_LCD_driver
+import I2C_LCD_driver
 from mfrc522 import SimpleMFRC522
 from config import RELAY_PINS, BUTTON_PINS
 

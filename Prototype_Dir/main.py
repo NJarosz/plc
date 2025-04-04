@@ -2,7 +2,7 @@ import time
 import csv
 from datetime import date, timedelta, datetime
 from mfrc522 import SimpleMFRC522
-import I2C_LCD_driver
+from Prototype_Dir import I2C_LCD_driver
 from gpiozero import LED, Button, OutputDevice
 import os
 import mfrc522
