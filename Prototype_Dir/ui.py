@@ -19,6 +19,7 @@ class UI:
 
     def display_standby(self, part_num, total_count, mach_num, counter_stop_point):
         """Show standby info."""
+        self.clear()
         top = f"{part_num}"
         bottom = f"{total_count}"
         if counter_stop_point != DEFAULT_COUNT_STOP:
