@@ -58,7 +58,7 @@ def exit_and_reload(ui):
     sys.exit(0)
 
 
-def handle_error(ui, message, error, delay=5):
+def handle_error(ui, message, error, delay=8):
     #print(f"Handling error: {message} - {error}")
     ui.clear()
     ui.message(message, 1)

@@ -56,7 +56,7 @@ def evaluate_sequence(seq_dict, hw):
                     return False, f"# {value} already off"
                 relay_state[relay_idx] = False
         elif "tmr" in key:
-            if not isinstance(value, float) or value >= 5:
+            if not isinstance(value, float) or value >= 8000:
                 return False, "Invalid Timer"
     if not seq_dict:
         return False, "Empty File"
