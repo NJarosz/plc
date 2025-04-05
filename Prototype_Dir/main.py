@@ -2,13 +2,13 @@ import time
 import csv
 from datetime import date, timedelta, datetime
 from mfrc522 import SimpleMFRC522
-from Prototype_Dir import I2C_LCD_driver
+from Prototype_Dir.lib import I2C_LCD_driver
 from gpiozero import LED, Button, OutputDevice
 import os
 import mfrc522
 from datetime import datetime
 import sys
-from hardware import Hardware
+from Prototype_Dir.modules.hardware import Hardware
 from config import *
 
 trigger_count = 1

@@ -4,7 +4,7 @@
 # PLC Number
 with open("/etc/hostname", "r") as hn:
     pi = hn.readline().rstrip("\n")
-count_num = int(''.join(i for i in pi if i.isdigit()))
+PI_NUM = int(''.join(i for i in pi if i.isdigit()))
 
 # File paths
 EMPLOYEE_INFO_FILE = "/home/pi/Documents/employee_info.txt"
@@ -14,6 +14,17 @@ WRITER_FILE = "/home/pi/Documents/writer.txt"
 PROGRAM_FOLDER = "/home/pi/PLC_Programs/"
 MAIN_PROGRAM_NAME = PROGRAM_FOLDER + "main.txt"
 CSV_PATH = "/home/pi/Documents/CSV/"
+
+# Button hold times
+MENU_BUTTON_HOLD_SECONDS = 2.5
+LOAD_BUTTON_HOLD_SECONDS = 2.5
+CARD_WRITE_HOLD_SECONDS = 8.0
+
+# Sequence debounce time
+SEQUENCE_DEBOUNCE_SECONDS = 1.0
+
+# Default triggers
+DEFAULT_TRIGGERS = "default"
 
 # GPIO pin assignments (Pi Zero W)
 RELAY_PINS = [4, 17, 27, 22, 5, 6, 13, 19]  # 8 relays,

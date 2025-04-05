@@ -1,6 +1,6 @@
 from gpiozero import LED, Button, OutputDevice
 from mfrc522 import SimpleMFRC522
-from Prototype_Dir import I2C_LCD_driver
+from Prototype_Dir.lib import I2C_LCD_driver
 from datetime import date, timedelta, datetime
 import time
 import csv
