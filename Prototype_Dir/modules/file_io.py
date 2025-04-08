@@ -2,8 +2,11 @@
 import csv
 import os
 import time
+import logging
 from datetime import date
 from config import *
+
+logger = logging.getLogger(__name__)
 
 def get_file_modify_time(filename):
     """Return the modification time of a file, or -1 if not found."""
@@ -22,7 +25,8 @@ def load_employee_list(filename=EMPLOYEE_INFO_FILE):
                     key, value = line.replace(' ', '').strip().split(",")
                     emps[key.lower()] = value
         return emps, True
-    except:
+    except OSError as e:
+        logger.error(f"Failed to load employees: {e}")
         return {}, False
 
 def read_production_info(filename=PRODUCTION_INFO_FILE):

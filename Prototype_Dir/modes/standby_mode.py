@@ -24,8 +24,8 @@ def run_standby_mode(ui, hw, state, triggers):
             time.sleep(0.5)
             if hw.button_2.is_pressed:
                 hw.button_2.wait_for_release()
-                emp_num = 998
-                emp_name = state["employees"].get(emp_num.lower(), "UNK")
+                emp_num = "998"
+                emp_name = state["employees"].get(emp_num, "UNK")
                 emp_count = 0
                 add_timestamp("LOG_ON", state["file_path"], PI_NUM, state["mach_num"], state["part_num"], emp_num)
                 state["logon_time"] = datetime.now()
