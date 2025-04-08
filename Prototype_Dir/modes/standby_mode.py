@@ -39,6 +39,8 @@ def run_standby_mode(ui, hw, state, triggers):
             hw.button_1.wait_for_release()
             if datetime.now() >= button_press_time + timedelta(seconds=MENU_BUTTON_HOLD_SECONDS):
                 return MODES["menu"], state
+            else:
+
 
         if hw.button_2.is_pressed:
             ui.message(f"Hold {round(LOAD_BUTTON_HOLD_SECONDS)} sec>>Load", 1)
@@ -49,6 +51,12 @@ def run_standby_mode(ui, hw, state, triggers):
                 exit_and_reload(ui)
             elif datetime.now() >= button_press_time + timedelta(seconds=LOAD_BUTTON_HOLD_SECONDS):
                 exit_and_reload(ui)
+            else:
+                try:
+                    ui.display_standby(state["part_num"], state["total_count"], state["mach_num"],
+                                       state["counter_stop_point"])
+                except Exception as e:
+                    return handle_error(ui, "STANDBY ERROR", e), state
 
         if datetime.now() >= state["last_load_time"] + timedelta(seconds=RELOAD_SECONDS):
             potential_reboot(state["boot_time"], ui)
