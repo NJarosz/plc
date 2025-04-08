@@ -1,4 +1,5 @@
 import sys
+import logging
 from datetime import datetime
 from modules.hardware import Hardware
 from modules.ui import UI
@@ -10,8 +11,12 @@ from modes.run_mode import run_run_mode
 from modes.error_mode import run_error_mode
 from config import DEFAULT_TRIGGERS, MODES
 
+# Setup logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
+
 def main():
-    triggers = sys.argv[1].upper().strip() if len(sys.argv) > 1 else DEFAULT_TRIGGERS
+    triggers = sys.argv[1].upper().strip() if len(sys.argv) > 1 else DEFAULT_TRIGGERS  # Sets num of triggers
     try:
         hw = Hardware(triggers)
         ui = UI(hw.lcd)
@@ -21,7 +26,7 @@ def main():
 
     state = {
         "startup": True,
-        "employees": load_employee_list()[0] or {},
+        "employees": load_employee_list()[0],
         "total_count": read_total_count(),
         "emp_num": None,
         "emp_name": None,

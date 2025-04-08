@@ -2,8 +2,11 @@
 import os
 import sys
 import time
+import logging
 from datetime import timedelta, datetime
 from config import WRITER_FILE, REBOOT_WAIT_SECONDS, REBOOT_HOUR, MODES
+
+logger = logging.getLogger(__name__)
 
 def write_card(hw, ui):
     """Write a string from WRITER_FILE to an RFID card using Hardware and UI instances."""
