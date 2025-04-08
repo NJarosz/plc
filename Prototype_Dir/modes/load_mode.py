@@ -27,7 +27,7 @@ def run_load_mode(ui, hw, state):
             return handle_error(ui, "INVALID SEQ", msg), state
         state["part_num"], state["mach_num"], state["counter_stop_point"] = read_production_info()
         logger.info(f"Information loaded: {state['file_path']}, {state['part_num']}, {state['mach_num']}, {state['counter_stop_point']}")
-        logger.info(f"Sequence loaded: {state['seq']}, {valid}")
+        logger.info(f"Sequence loaded: {state['seq']}, VALID={valid}")
     except Exception as e:
         return handle_error(ui, "LOAD ERROR", e), state
     state["production_file_modify_time"] = get_file_modify_time(PRODUCTION_INFO_FILE)
