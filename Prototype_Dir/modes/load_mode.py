@@ -2,6 +2,9 @@ from modules.file_io import update_csv, read_production_info, get_file_modify_ti
 from modules.sequence import create_sequence, evaluate_sequence
 from modules.utils import handle_error
 from config import MODES, PI_NUM, PRODUCTION_INFO_FILE
+import logger
+
+logger = logging.getLogger(__name__)
 
 def run_load_mode(ui, hw, state):
     """
@@ -10,6 +13,7 @@ def run_load_mode(ui, hw, state):
     """
     ui.clear()
     ui.message("Loading Info...", 1, 5)
+    loggier.info("Loading Info...")
     if state["startup"] or date.today() != state["today"]:
         try:
             state["today"], state["file_path"] = update_csv(PI_NUM)
@@ -22,6 +26,8 @@ def run_load_mode(ui, hw, state):
         if not valid:
             return handle_error(ui, "INVALID SEQ", msg), state
         state["part_num"], state["mach_num"], state["counter_stop_point"] = read_production_info()
+        logger.info(f"Information loaded: {state['file_path']}, {state['part_num'], {state['mach_num']}, {state['counter_stop_point']} )
+        logger.info(f"Sequence loaded: {state['seq']}, {valid}")
     except Exception as e:
         return handle_error(ui, "LOAD ERROR", e), state
     state["production_file_modify_time"] = get_file_modify_time(PRODUCTION_INFO_FILE)
