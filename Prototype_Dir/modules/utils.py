@@ -50,6 +50,7 @@ def potential_reboot(boot_time, ui):
         ui.message("Rebooting ...", 1)
         os.system("sudo reboot")
     else:
+        pass
         #logger.info("No reboot needed.")
 
 
