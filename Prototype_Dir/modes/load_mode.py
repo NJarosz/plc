@@ -1,6 +1,6 @@
-from modules.file_io import update_csv, read_production_info, get_file_modify_time
-from modules.sequence import create_sequence, evaluate_sequence
-from modules.utils import handle_error
+from file_io import update_csv, read_production_info, get_file_modify_time
+from sequence import create_sequence, evaluate_sequence
+from utils import handle_error
 from config import MODES, PI_NUM, PRODUCTION_INFO_FILE
 
 def run_load_mode(ui, hw, state):

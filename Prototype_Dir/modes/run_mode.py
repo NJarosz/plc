@@ -1,8 +1,8 @@
 import time
 from datetime import datetime, timedelta
-from modules.sequence import run_sequence
-from modules.file_io import add_timestamp, update_total_count
-from modules.utils import handle_error
+from sequence import run_sequence
+from file_io import add_timestamp, update_total_count
+from utils import handle_error
 from config import MODES, PI_NUM, SEQUENCE_DEBOUNCE_SECONDS, TIMEOUT_SECONDS
 
 def run_run_mode(ui, hw, state, triggers):

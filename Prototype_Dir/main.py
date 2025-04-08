@@ -1,14 +1,14 @@
 import sys
 import logging
 from datetime import datetime
-from modules.hardware import Hardware
-from modules.ui import UI
-from modules.file_io import load_employee_list, read_total_count
-from modes.load_mode import run_load_mode
-from modes.standby_mode import run_standby_mode
-from modes.menu_mode import run_menu_mode
-from modes.run_mode import run_run_mode
-from modes.error_mode import run_error_mode
+from hardware import Hardware
+from ui import UI
+from file_io import load_employee_list, read_total_count
+from load_mode import run_load_mode
+from standby_mode import run_standby_mode
+from menu_mode import run_menu_mode
+from run_mode import run_run_mode
+from error_mode import run_error_mode
 from config import DEFAULT_TRIGGERS, MODES
 
 # Setup logging
