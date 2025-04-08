@@ -56,6 +56,6 @@ def run_standby_mode(ui, hw, state, triggers):
                 exit_and_reload(ui)
             state["last_load_time"] = datetime.now()
 
-        time.sleep(0.1)
+        #time.sleep(0.1)
         # If no action, stay in standby (loop continues)
-        return MODES["standby"], state
+        #return MODES["standby"], state
