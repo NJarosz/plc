@@ -22,7 +22,15 @@ def run_standby_mode(ui, hw, state, triggers):
         if hw.rfid_bypass.is_pressed:
             ui.message(f"{state['part_num']} BYPASS", 1)
             time.sleep(0.5)
-            return MODES["run"], state
+            if hw.button_2.is_pressed:
+                button2.wait_for_release()
+                emp_num = 998
+                emp_name = state["employees"].get(emp_num.lower(), "UNK")
+                emp_count = 0
+                add_timestamp("LOG_ON", state["file_path"], PI_NUM, state["mach_num"], state["part_num"], emp_num)
+                state["logon_time"] = datetime.now()
+                logger.info(f"LOG-ON: {emp_num}")
+                return MODES["run"], state
         else:
             try:
                 reader = hw.init_reader()
@@ -30,7 +38,7 @@ def run_standby_mode(ui, hw, state, triggers):
                 if emp_num:
                     emp_num = emp_num.strip()
                     state["emp_num"] = emp_num
-                    state["emp_name"] = state["employees"].get(emp_num.lower(), None)
+                    state["emp_name"] = state["employees"].get(emp_num.lower(), "UNK")
                     add_timestamp("LOG_ON", state["file_path"], PI_NUM, state["mach_num"], state["part_num"], emp_num)
                     state["logon_time"] = datetime.now()
                     logger.info(f"LOG-ON: {emp_num}")
