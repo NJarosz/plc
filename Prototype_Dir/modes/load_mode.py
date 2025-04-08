@@ -2,7 +2,7 @@ from modules.file_io import update_csv, read_production_info, get_file_modify_ti
 from modules.sequence import create_sequence, evaluate_sequence
 from modules.utils import handle_error
 from config import MODES, PI_NUM, PRODUCTION_INFO_FILE
-import logger
+import logging
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +13,7 @@ def run_load_mode(ui, hw, state):
     """
     ui.clear()
     ui.message("Loading Info...", 1, 5)
-    loggier.info("Loading Info...")
+    logger.info("Loading Info...")
     if state["startup"] or date.today() != state["today"]:
         try:
             state["today"], state["file_path"] = update_csv(PI_NUM)
