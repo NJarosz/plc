@@ -38,11 +38,19 @@ def run_standby_mode(ui, hw, state, triggers):
                 if emp_num:
                     emp_num = emp_num.strip()
                     state["emp_num"] = emp_num
-                    state["emp_name"] = state["employees"].get(emp_num.lower(), None)
-                    add_timestamp("LOG_ON", state["file_path"], PI_NUM, state["mach_num"], state["part_num"], emp_num)
-                    state["logon_time"] = datetime.now()
-                    logger.info(f"LOG-ON: {emp_num}")
-                    return MODES["run"], state
+                    emp_name = state["employees"].get(emp_num.lower(), None)
+                    if emp_name is not None:  # Check if emp_num is in employees
+                        state["emp_name"] = emp_name
+                        add_timestamp("LOG_ON", state["file_path"], PI_NUM, state["mach_num"], state["part_num"],
+                                      emp_num)
+                        state["logon_time"] = datetime.now()
+                        logger.info(f"LOG-ON: {emp_num} ({emp_name})")
+                        return MODES["run"], state
+                    else:
+                        logger.warning(f"Unauthorized RFID: {emp_num} not in employee list")
+                        ui.message("Unknown RFID", 1, 3)  # Optional feedback
+                        state["emp_num"] = None
+                        return MODES["standby"], state
             except Exception as e:
                 return handle_error(ui, "RFID ERROR", e), state
 
