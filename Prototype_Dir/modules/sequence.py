@@ -1,6 +1,6 @@
 # sequence.py
 import time
-from hardware import Hardware
+from modules.hardware import Hardware
 from config import MAIN_PROGRAM_NAME, PROGRAM_FOLDER
 
 def read_main():
