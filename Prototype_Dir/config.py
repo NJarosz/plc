@@ -16,9 +16,9 @@ MAIN_PROGRAM_NAME = PROGRAM_FOLDER + "main.txt"
 CSV_PATH = "/home/pi/Documents/CSV/"
 
 # Button hold times
-MENU_BUTTON_HOLD_SECONDS = 2.5
-LOAD_BUTTON_HOLD_SECONDS = 2.5
-CARD_WRITE_HOLD_SECONDS = 8.0
+MENU_BUTTON_HOLD_SECONDS = 2.5  # Needs to be a number
+LOAD_BUTTON_HOLD_SECONDS = 2.5  # Needs to be a number
+CARD_WRITE_HOLD_SECONDS = 8.0   # Needs to be a number
 
 # Sequence debounce time
 SEQUENCE_DEBOUNCE_SECONDS = 1.0

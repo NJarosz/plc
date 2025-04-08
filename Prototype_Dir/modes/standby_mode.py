@@ -34,14 +34,14 @@ def run_standby_mode(ui, hw, state, triggers):
                 return handle_error(ui, "RFID ERROR", e), state
 
         if hw.button_1.is_pressed:
-            ui.message(f"Hold {MENU_BUTTON_HOLD_SECONDS} sec>>Menu", 1)
+            ui.message(f"Hold {round(MENU_BUTTON_HOLD_SECONDS)} sec>>Menu", 1)
             button_press_time = datetime.now()
             hw.button_1.wait_for_release()
             if datetime.now() >= button_press_time + timedelta(seconds=MENU_BUTTON_HOLD_SECONDS):
                 return MODES["menu"], state
 
         if hw.button_2.is_pressed:
-            ui.message(f"Hold {LOAD_BUTTON_HOLD_SECONDS} sec>>Load", 1)
+            ui.message(f"Hold {round(LOAD_BUTTON_HOLD_SECONDS)} sec>>Load", 1)
             button_press_time = datetime.now()
             hw.button_2.wait_for_release()
             if datetime.now() >= button_press_time + timedelta(seconds=CARD_WRITE_HOLD_SECONDS):
