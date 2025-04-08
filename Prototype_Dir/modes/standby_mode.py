@@ -1,6 +1,6 @@
 import time
 from datetime import datetime, timedelta
-from utils import potential_reboot, exit_and_reload, handle_error
+from modules.utils import potential_reboot, exit_and_reload, handle_error
 from config import MODES, MENU_BUTTON_HOLD_SECONDS, LOAD_BUTTON_HOLD_SECONDS, CARD_WRITE_HOLD_SECONDS, \
     RELOAD_SECONDS, PRODUCTION_INFO_FILE
 

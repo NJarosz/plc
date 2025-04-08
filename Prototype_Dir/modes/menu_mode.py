@@ -1,5 +1,5 @@
-from utils import handle_error
-from file_io import update_total_count
+from modules.utils import handle_error
+from modules.file_io import update_total_count
 from config import MODES
 
 def run_menu_mode(ui, hw, state):
