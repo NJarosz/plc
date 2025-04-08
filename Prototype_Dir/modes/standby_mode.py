@@ -4,6 +4,9 @@ from modules.file_io import add_timestamp, get_file_modify_time
 from modules.utils import potential_reboot, exit_and_reload, handle_error
 from config import MODES, MENU_BUTTON_HOLD_SECONDS, LOAD_BUTTON_HOLD_SECONDS, CARD_WRITE_HOLD_SECONDS, \
     RELOAD_SECONDS, PRODUCTION_INFO_FILE, PI_NUM
+import logging
+
+logger = logging.getLogger(__name__)
 
 def run_standby_mode(ui, hw, state, triggers):
     """
@@ -19,6 +22,7 @@ def run_standby_mode(ui, hw, state, triggers):
         if hw.rfid_bypass.is_pressed:
             ui.message(f"{state['part_num']} BYPASS", 1)
             time.sleep(0.5)
+            return MODES["run"], state
         else:
             try:
                 reader = hw.init_reader()
@@ -29,6 +33,7 @@ def run_standby_mode(ui, hw, state, triggers):
                     state["emp_name"] = state["employees"].get(emp_num.lower(), None)
                     add_timestamp("LOG_ON", state["file_path"], PI_NUM, state["mach_num"], state["part_num"], emp_num)
                     state["logon_time"] = datetime.now()
+                    logger.info(f"LOG-ON: {emp_num}")
                     return MODES["run"], state
             except Exception as e:
                 return handle_error(ui, "RFID ERROR", e), state

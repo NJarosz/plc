@@ -42,7 +42,7 @@ def write_card(hw, ui):
 
 def potential_reboot(boot_time, ui):
     """Check if time has elapsed for a system reboot"""
-    logger.info("Checking for reboot")
+    #logger.info("Checking for reboot")
     timenow = datetime.now()
     if timenow > boot_time + timedelta(seconds=REBOOT_WAIT_SECONDS) and timenow.hour == REBOOT_HOUR:
         logger.info("Reboot condition met. Rebooting...")
@@ -50,7 +50,7 @@ def potential_reboot(boot_time, ui):
         ui.message("Rebooting ...", 1)
         os.system("sudo reboot")
     else:
-        logger.info("No reboot needed.")
+        #logger.info("No reboot needed.")
 
 
 def exit_and_reload(ui):
