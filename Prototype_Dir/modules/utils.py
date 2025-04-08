@@ -42,29 +42,28 @@ def write_card(hw, ui):
 
 def potential_reboot(boot_time, ui):
     """Check if time has elapsed for a system reboot"""
-    #print("Checking for reboot...")
+    logger.info("Checking for reboot")
     timenow = datetime.now()
     if timenow > boot_time + timedelta(seconds=REBOOT_WAIT_SECONDS) and timenow.hour == REBOOT_HOUR:
-        #print("Reboot condition met. Rebooting...")
+        logger.info("Reboot condition met. Rebooting...")
         ui.clear()
         ui.message("Rebooting ...", 1)
         os.system("sudo reboot")
-    #else:
-        #print("No reboot needed.")
+    else:
+        logger.info("No reboot needed.")
 
 
 def exit_and_reload(ui):
     """Exits and reenters the script"""
-    #print("Exiting and reloading...")
+    logger.info("Exiting and reloading...")
     ui.clear()
     ui.message("Reloading ...", 1)
     sys.exit(0)
 
 
 def handle_error(ui, message, error, delay=8):
-    #print(f"Handling error: {message} - {error}")
+    logger.error(f"{message}: {error}")
     ui.clear()
     ui.message(message, 1)
     ui.message(str(error)[:16], 2, delay)
-    from config import MODES
     return MODES["error"]

@@ -12,7 +12,14 @@ from modes.error_mode import run_error_mode
 from config import DEFAULT_TRIGGERS, MODES
 
 # Setup logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler('/home/pi/logs/plc.log'),
+        logging.StreamHandler()
+    ]
+)
 logger = logging.getLogger(__name__)
 
 def main():
@@ -58,9 +65,16 @@ def main():
                 if mode == MODES["error"]:  # Exit on error mode persistence
                     break
     except KeyboardInterrupt:
-        print("Program interrupted by user.")
+        logger.info("Program interrupted by user.")
         hw.close()
         sys.exit(0)
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}")
+        ui.clear()
+        ui.message("FATAL ERROR", 1)
+        ui.message(str(e)[:16], 2, 5)
+        hw.close()
+        sys.exit(1)
     finally:
         hw.close()
 
