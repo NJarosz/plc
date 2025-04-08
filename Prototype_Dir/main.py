@@ -1,7 +1,7 @@
 import sys
 import logging
 from datetime import datetime
-from hardware import Hardware
+from modules.hardware import Hardware
 from ui import UI
 from file_io import load_employee_list, read_total_count
 from load_mode import run_load_mode
