@@ -23,7 +23,7 @@ def run_standby_mode(ui, hw, state, triggers):
             ui.message(f"{state['part_num']} BYPASS", 1)
             time.sleep(0.5)
             if hw.button_2.is_pressed:
-                button2.wait_for_release()
+                button_2.wait_for_release()
                 emp_num = 998
                 emp_name = state["employees"].get(emp_num.lower(), "UNK")
                 emp_count = 0
