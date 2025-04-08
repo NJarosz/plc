@@ -31,4 +31,5 @@ def run_load_mode(ui, hw, state):
     except Exception as e:
         return handle_error(ui, "LOAD ERROR", e), state
     state["production_file_modify_time"] = get_file_modify_time(PRODUCTION_INFO_FILE)
+    logger.info("Load complete. Entering Standby.")
     return MODES["standby"], state
