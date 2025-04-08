@@ -35,10 +35,10 @@ def run_standby_mode(ui, hw, state, triggers):
             try:
                 reader = hw.init_reader()
                 idn, emp_num = reader.read_no_block()
-                if emp_num:
+                if state["employees"].get(emp_num.lower, None):
                     emp_num = emp_num.strip()
                     state["emp_num"] = emp_num
-                    state["emp_name"] = state["employees"].get(emp_num.lower(), "UNK")
+                    state["emp_name"] = state["employees"].get(emp_num.lower(), None)
                     add_timestamp("LOG_ON", state["file_path"], PI_NUM, state["mach_num"], state["part_num"], emp_num)
                     state["logon_time"] = datetime.now()
                     logger.info(f"LOG-ON: {emp_num}")
