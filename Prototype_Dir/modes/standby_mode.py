@@ -35,7 +35,7 @@ def run_standby_mode(ui, hw, state, triggers):
             try:
                 reader = hw.init_reader()
                 idn, emp_num = reader.read_no_block()
-                if state["employees"].get(emp_num.lower, None):
+                if emp_num:
                     emp_num = emp_num.strip()
                     state["emp_num"] = emp_num
                     state["emp_name"] = state["employees"].get(emp_num.lower(), None)
