@@ -40,6 +40,11 @@ def run_standby_mode(ui, hw, state, triggers):
             if datetime.now() >= button_press_time + timedelta(seconds=MENU_BUTTON_HOLD_SECONDS):
                 return MODES["menu"], state
             else:
+                try:
+                    ui.display_standby(state["part_num"], state["total_count"], state["mach_num"],
+                                       state["counter_stop_point"])
+                except Exception as e:
+                    return handle_error(ui, "STANDBY ERROR", e), state
 
 
         if hw.button_2.is_pressed:
