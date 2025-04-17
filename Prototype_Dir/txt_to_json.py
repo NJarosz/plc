@@ -22,6 +22,6 @@ def convert_to_json(input_file, output_file):
 
 if __name__ == "__main__":
     input_files = [PRODUCTION_INFO_FILE, EMPLOYEE_INFO_FILE, TOTAL_COUNT_FILE]
-    output_files = ["production.json", "employees.json", "totalcount.json"]
+    output_files = ["data/production.json", "data/employees.json", "data/totalcount.json"]
     for i in range(len(input_files)):
         convert_to_json(input_files[i], output_files[i])
