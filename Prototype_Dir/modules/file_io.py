@@ -70,7 +70,7 @@ def add_timestamp(event, file_path, pi_num, mach_num, part_num, emp_num):
         writer.writerow([event, pi_num, mach_num, part_num, emp_num, now, date.today()])
 
 
-def read_total_count(filename=TOTAL_COUNT_FILE):
+def read_total_count(filename=TOTALCOUNT_FILE):
     try:
         with open(filename, 'r') as f:
             data = json.load(f)
@@ -86,7 +86,7 @@ def read_total_count(filename=TOTAL_COUNT_FILE):
         return 0
 
 
-def update_total_count(count, filename=TOTAL_COUNT_FILE):
+def update_total_count(count, filename=TOTALCOUNT_FILE):
     try:
         with open(filename, 'w') as f:
             json.dump({"count": count}, f)
