@@ -1,6 +1,7 @@
 import json
-from config import EMPLOYEE_INFO_FILE, PRODUCTION_INFO_FILE, TOTALCOUNT_FILE
-
+EMPLOYEE_INFO_FILE = "/home/pi/Documents/employee_info.txt"
+PRODUCTION_INFO_FILE = "/home/pi/Documents/production_info.txt"
+TOTALCOUNT_FILE = "home/pi/Documents/totalcount.txt"
 
 def convert_to_json(input_file, output_file):
     data = []
