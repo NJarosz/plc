@@ -39,7 +39,7 @@ def main():
             save_json(PRODUCTION_INFO_FILE, prod)
         elif choice == "3":
             count = load_json(TOTALCOUNT_FILE)
-            print("Current:", count)
+            print("Current:", count["countg"])
             count["count"] = int(input("Total Count: ") or count.get("count", 0))
             save_json(TOTALCOUNT_FILE, count)
         elif choice == "4":
