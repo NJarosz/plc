@@ -1,6 +1,9 @@
-import json
-from ..config import EMPLOYEE_INFO_FILE, PRODUCTION_INFO_FILE, TOTAL_COUNT_FILE
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'Prototype_Dir')))
 
+import json
+from config import EMPLOYEE_INFO_FILE, PRODUCTION_INFO_FILE, TOTAL_COUNT_FILE
 
 
 def convert_to_json(input_file, output_file):
