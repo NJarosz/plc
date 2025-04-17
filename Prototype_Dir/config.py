@@ -7,9 +7,9 @@ with open("/etc/hostname", "r") as hn:
 PI_NUM = int(''.join(i for i in pi if i.isdigit()))
 
 # File paths
-EMPLOYEE_INFO_FILE = "./data/employees.json"
-PRODUCTION_INFO_FILE = "./data/production.json"
-TOTALCOUNT_FILE = "./data/totalcount.json"
+EMPLOYEE_INFO_FILE = "/home/pi/Documents/employee_info.txt"
+PRODUCTION_INFO_FILE = "/home/pi/Documents/production_info.txt"
+TOTALCOUNT_FILE = "/home/pi/Documents/totalcount.txt"
 WRITER_FILE = "/home/pi/Documents/writer.txt"
 PROGRAM_FOLDER = "/home/pi/PLC_Programs/"
 MAIN_PROGRAM_NAME = PROGRAM_FOLDER + "main.txt"
