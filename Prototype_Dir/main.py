@@ -16,7 +16,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler('/home/pi/logs/plc.log'),
+        logging.FileHandler('./logs/plc.log'),
         logging.StreamHandler()
     ]
 )
@@ -28,7 +28,7 @@ def main():
         hw = Hardware(triggers)
         ui = UI(hw.lcd)
     except Exception as e:
-        print(f"Failed to initialize hardware/UI: {e}")
+        logger.error(f"Failed to initialize hardware/UI: {e}")
         sys.exit(1)
 
     state = {

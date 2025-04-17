@@ -75,6 +75,7 @@ def read_total_count(filename=TOTALCOUNT_FILE):
     try:
         with open(filename, 'r') as f:
             data = json.load(f)
+            count = data["count"]
         return int(data["count"])
     except (FileNotFoundError, KeyError, ValueError):
         logger.warning(f"Total count file missing or invalid, defaulting to 0")
