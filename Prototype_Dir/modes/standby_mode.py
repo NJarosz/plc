@@ -87,6 +87,7 @@ def run_standby_mode(ui, hw, state, triggers):
         if datetime.now() >= state["last_load_time"] + timedelta(seconds=RELOAD_SECONDS):
             potential_reboot(state["boot_time"], ui)
             if get_file_modify_time(PRODUCTION_INFO_FILE) != state["production_file_modify_time"]:
+                logger.info(f"{PRODUCTION_INFO_FILE} updated. Commence Reload")
                 exit_and_reload(ui)
             state["last_load_time"] = datetime.now()
 
