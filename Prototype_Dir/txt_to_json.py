@@ -6,6 +6,7 @@ def convert_to_json(input_file, output_file):
     data = []
     with open(input_file, 'r') as f:
         for line in f:
+            print(line)
             # Strip whitespace and split by comma
             key, value = line.split(',')
             # Create dictionary for each line
