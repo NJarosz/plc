@@ -1,6 +1,6 @@
 import json
 import sys
-from config import EMPLOYEE_INFO_FILE, PRODUCTION_INFO_FILE, TOTAL_COUNT_FILE
+from config import EMPLOYEE_INFO_FILE, PRODUCTION_INFO_FILE, TOTALCOUNT_FILE
 
 def load_json(file):
     try:
