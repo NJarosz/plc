@@ -4,14 +4,14 @@ PRODUCTION_INFO_FILE = "/home/pi/Documents/production_info.txt"
 TOTALCOUNT_FILE = "/home/pi/Documents/totalcount.txt"
 
 def convert_to_json(input_file, output_file):
-    data = []
+    data = {}
     with open(input_file, 'r') as f:
         for line in f:
             print(line)
             # Strip whitespace and split by comma
             key, value = line.split(',')
             # Create dictionary for each line
-            data.append({key.strip(): value.strip()})
+            data[key.strip()]=value.strip()
 
     # Write to JSON file
     with open(output_file, 'w') as f:
