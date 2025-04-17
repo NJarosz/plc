@@ -38,10 +38,10 @@ def main():
             prod["count_goal"] = int(input("Count Goal: ") or prod.get("count_goal", 10))
             save_json(PRODUCTION_INFO_FILE, prod)
         elif choice == "3":
-            count = load_json(TOTAL_COUNT_FILE)
+            count = load_json(TOTALCOUNT_FILE)
             print("Current:", count)
             count["count"] = int(input("Total Count: ") or count.get("count", 0))
-            save_json(TOTAL_COUNT_FILE, count)
+            save_json(TOTALCOUNT_FILE, count)
         elif choice == "4":
             sys.exit(0)
 
