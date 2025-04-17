@@ -45,7 +45,7 @@ def main():
         "seq": None,
         "part_num": None,
         "mach_num": None,
-        "counter_stop_point": None,
+        "counter_stop_point": 999999,
         "production_file_modify_time": None
     }
     mode = MODES["load"]
