@@ -9,7 +9,7 @@ def convert_to_json(input_file, output_file):
             # Strip whitespace and split by comma
             key, value = line.split(',')
             # Create dictionary for each line
-            data.append({"key": key.strip(), "value": value.strip()})
+            data.append({key.strip(): value.strip()})
 
     # Write to JSON file
     with open(output_file, 'w') as f:
