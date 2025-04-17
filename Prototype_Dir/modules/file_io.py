@@ -8,49 +8,48 @@ from config import *
 
 logger = logging.getLogger(__name__)
 
+
 def get_file_modify_time(filename):
     """Return the modification time of a file, or -1 if not found."""
     try:
         return os.path.getmtime(filename)
-    except:
+    except OSError as e:
+        logger.error(f"Failed to get mod time of {filename}: {e}")
         return -1
 
+
 def load_employee_list(filename=EMPLOYEE_INFO_FILE):
-    """Load employee ID-to-name mapping."""
-    emps = {}
     try:
         with open(filename, 'r') as f:
-            for line in f:
-                if line.strip() and "#" not in line:
-                    key, value = line.replace(' ', '').strip().split(",")
-                    emps[key.lower()] = value
+            emps = json.load(f)
+        logger.debug(f"Loaded employees: {len(emps)} entries")
         return emps, True
+    except FileNotFoundError:
+        logger.warning(f"Employee file not found: {filename}, using empty dict")
+        return {}, True
+    except json.JSONDecodeError as e:
+        logger.error(f"Invalid JSON in {filename}: {e}")
+        return {}, False
     except OSError as e:
-        logger.error(f"Failed to load employees: {e}")
+        logger.error(f"Failed to read {filename}: {e}")
         return {}, False
 
+
 def read_production_info(filename=PRODUCTION_INFO_FILE):
-    """Read part, machine, and count stop from file."""
-    part, machine, count_stop = DEFAULT_PART_NUMBER, DEFAULT_MACHINE, DEFAULT_COUNT_STOP
     try:
         with open(filename, 'r') as f:
-            for line in f:
-                if line.strip() and "#" not in line:
-                    key, value = line.replace(' ', '').strip().split(",")
-                    key = key.lower()
-                    if key == "part":
-                        part = value.upper()
-                    elif key == "machine":
-                        machine = value.upper()
-                    elif key == "count_stop":
-                        count_stop = int(value) if value.isdigit() else count_stop
-    except:
-        pass
-    part = part.strip()[:MAX_PART_NUMBER_LENGTH]
-    machine = machine.strip()[:MAX_MACHINE_LENGTH]
-    if not (MIN_COUNT_STOP <= count_stop <= DEFAULT_COUNT_STOP):
-        count_stop = DEFAULT_COUNT_STOP
-    return part, machine, count_stop
+            data = json.load(f)
+        return data["part"], data["mach"], int(data["count_goal"])
+    except (FileNotFoundError, KeyError, ValueError) as e:
+        logger.warning(f"Production file issue: {e}, using defaults")
+        return "000000", "nA", 0
+    except json.JSONDecodeError as e:
+        logger.error(f"Invalid JSON in {filename}: {e}")
+        return "000000", "nA", 0
+    except OSError as e:
+        logger.error(f"Failed to read {filename}: {e}")
+        return "000000", "nA", 0
+
 
 def update_csv(pi_num):
     """Create or update daily CSV file."""
@@ -62,6 +61,7 @@ def update_csv(pi_num):
             writer.writerow(["Type", "pi", "Machine", "Part", "User_ID", "Time", "Date"])
     return today, file_path
 
+
 def add_timestamp(event, file_path, pi_num, mach_num, part_num, emp_num):
     """Log an event to CSV."""
     now = time.strftime("%H:%M:%S")
@@ -69,20 +69,35 @@ def add_timestamp(event, file_path, pi_num, mach_num, part_num, emp_num):
         writer = csv.writer(f)
         writer.writerow([event, pi_num, mach_num, part_num, emp_num, now, date.today()])
 
-def read_total_count():
-    """Read total count from file."""
+
+def read_total_count(filename=TOTAL_COUNT_FILE):
     try:
-        with open(TOTALCOUNT_FILE, "r") as f:
-            cnt = int(f.readline().strip())
-            return max(0, min(cnt, DEFAULT_COUNT_STOP))
-    except:
+        with open(filename, 'r') as f:
+            data = json.load(f)
+        return int(data["count"])
+    except (FileNotFoundError, KeyError, ValueError):
+        logger.warning(f"Total count file missing or invalid, defaulting to 0")
+        return 0
+    except json.JSONDecodeError as e:
+        logger.error(f"Invalid JSON in {filename}: {e}")
+        return 0
+    except OSError as e:
+        logger.error(f"Failed to read {filename}: {e}")
         return 0
 
-def update_total_count(total_count):
-    """Write total count to file."""
+
+def update_total_count(count, filename=TOTAL_COUNT_FILE):
     try:
-        with open(TOTALCOUNT_FILE, "w") as f:
-            f.write(str(total_count))
-        return os.path.getmtime(TOTALCOUNT_FILE)
-    except:
-        return -1
+        with open(filename, 'w') as f:
+            json.dump({"count": count}, f)
+        logger.debug(f"Updated total count to {count}")
+    except OSError as e:
+        logger.error(f"Failed to write total count: {e}")
+
+
+
+
+
+
+
+
