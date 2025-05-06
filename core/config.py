@@ -12,7 +12,7 @@ PRODUCTION_INFO_FILE = "../data/production.json"
 TOTALCOUNT_FILE = "../data/totalcount.json"
 WRITER_FILE = "../docs/writer.txt"
 PROGRAM_FOLDER = "../scripts/plc_programs/"
-MAIN_PROGRAM_NAME = PROGRAM_FOLDER + "main.txt"
+MAIN_PROGRAM_NAME = PROGRAM_FOLDER + "main.plc"
 CSV_PATH = "../data/csv/"
 
 # Button hold times
