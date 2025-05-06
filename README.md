@@ -3,13 +3,13 @@ A Raspberry Pi-based Programmable Logic Controller (PLC) for managing industrial
 
 ### Features:
 
-RFID Authentication: Restricts operation to authorized employees listed in data/employees.json.
-State Machine: Manages modes (load, standby, run, menu, error) for robust control.
-JSON Configuration: Stores settings in data/production.json and data/total_count.json.
-Logging: Records events to logs/plc.log with daily rotation.
-CLI Tool: Edit configurations via cli/plc_config.py.
-Systemd Integration: Runs as a service (plc.service) with auto-restart.
-Modular Design: Organized codebase with separate modules for hardware, file I/O, and UI.
+RFID Authentication: Restricts operation to authorized employees listed in data/employees.json.  
+State Machine: Manages modes (load, standby, run, menu, error) for robust control.  
+JSON Configuration: Stores settings in data/production.json and data/total_count.json.  
+Logging: Records events to logs/plc.log with daily rotation.  
+CLI Tool: Edit configurations via cli/plc_config.py.  
+Systemd Integration: Runs as a service (plc.service) with auto-restart.  
+Modular Design: Organized codebase with separate modules for hardware, file I/O, and UI. 
 
 
 ## Directory Structure
@@ -62,15 +62,15 @@ plc/
 ```
 ## Prerequisites
 
-Hardware: Raspberry Pi (e.g., pi Zero w) with Raspbian, LCD display, RC522 RFID reader, GPIO-connected relays/buttons.
-Software: Python 3.7+
-Dependencies: pip3 install gpiozero python3-mfrc522
-Systemd for service management
+Hardware: Raspberry Pi (e.g., pi Zero w) with Raspbian, LCD display, RC522 RFID reader, GPIO-connected relays/buttons.  
+Software: Python 3.7+  
+Dependencies: pip3 install gpiozero python3-mfrc522  
+Systemd for service management  
 
 ## Setup
 
 ### Clone the Repository:
-git clone https://github.com/yourusername/plc.git
+git clone https://github.com/yourusername/plc.git  
 cd plc
 
 ### Install Dependencies:
@@ -80,30 +80,30 @@ sudo pip3 install gpiozero python3-mfrc522
 sudo nano /etc/systemd/system/plc.service
 
 #### Add:
-[Unit]
-Description=PLC Control Service
-After=network.target
+[Unit]  
+Description=PLC Control Service  
+After=network.target  
 
-[Service]
-ExecStart=/usr/bin/python3 /home/pi/plc/core/main.py
-WorkingDirectory=/home/pi/plc/core
-StandardOutput=journal
-StandardError=journal
-Restart=always
-RestartSec=1
-User=pi
+[Service]  
+ExecStart=/usr/bin/python3 /home/pi/plc/core/main.py  
+WorkingDirectory=/home/pi/plc/core  
+StandardOutput=journal  
+StandardError=journal  
+Restart=always  
+RestartSec=1  
+User=pi  
 
-[Install]
-WantedBy=multi-user.target
+[Install]  
+WantedBy=multi-user.target  
 
 #### Enable and start:
-sudo systemctl daemon-reload
-sudo systemctl enable plc.service
-sudo systemctl start plc.service
+sudo systemctl daemon-reload  
+sudo systemctl enable plc.service  
+sudo systemctl start plc.service  
 
 
 ### Set Up Log Rotation:
-chmod +x scripts/rotate_plc_logs.sh
+chmod +x scripts/rotate_plc_logs.sh  
 crontab -e
 
 #### Add:
@@ -114,13 +114,13 @@ crontab -e
 nano ~/.bashrc
 
 #### Add:
-alias plcstatus='sudo systemctl status plc.service'
-alias plcstart='sudo systemctl start plc.service'
-alias plcstop='sudo systemctl stop plc.service'
-alias plcrestart='sudo systemctl restart plc.service'
-alias plclogs='journalctl -u plc.service -f'
-alias rotatelogs='/home/pi/plc/scripts/rotate_plc_logs.sh'
-alias plcconfig='cd /home/pi/plc && python3 -m interface.json_config'
+alias plcstatus='sudo systemctl status plc.service'  
+alias plcstart='sudo systemctl start plc.service'  
+alias plcstop='sudo systemctl stop plc.service'  
+alias plcrestart='sudo systemctl restart plc.service'  
+alias plclogs='journalctl -u plc.service -f'  
+alias rotatelogs='/home/pi/plc/scripts/rotate_plc_logs.sh'  
+alias plcconfig='cd /home/pi/plc && python3 -m interface.json_config'  
 
 ### Apply:
 source ~/.bashrc
@@ -131,9 +131,9 @@ Copy the employee template:cp data/employees.json.template data/employees.json
 
 ~$ plcconfig
 
-Edit data/employees.json (e.g., {"123": "John"}).
-Verify data/production.json (e.g., {"part": "ABC123", "mach": "M1", "count_goal": 10}).
-Verify data/total_count.json (e.g., {"count": 0}).
+Edit data/employees.json (e.g., {"123": "John"}).  
+Verify data/production.json (e.g., {"part": "ABC123", "mach": "M1", "count_goal": 10}).  
+Verify data/total_count.json (e.g., {"count": 0}).  
 
 
 ## Usage
@@ -143,20 +143,20 @@ plcstart
 
 ### Check Status/Logs:
 
-plcstatus
+plcstatus  
 plclogs
 
 ### Run a Shot:
-In standby mode, scan an authorized RFID tag to enter run mode.
-Trigger a shot (via hardware sequence)—logs to data/csv/ and logs/plc.log.
+In standby mode, scan an authorized RFID tag to enter run mode.  
+Trigger a shot (via hardware sequence)—logs to data/csv/ and logs/plc.log.  
 
 ### Reload Config: 
 
-Edit production.json—auto-reloads within 60 seconds (see RELOAD_SECONDS).
+Edit production.json—auto-reloads within 60 seconds (see RELOAD_SECONDS).  
 
 ### Contributing
 
-Fork the repository and create a pull request.
-Report issues via GitHub Issues.
-Ensure code follows PEP 8 and includes logging for errors.
+Fork the repository and create a pull request.  
+Report issues via GitHub Issues.  
+Ensure code follows PEP 8 and includes logging for errors. 
 
