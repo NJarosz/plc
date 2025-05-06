@@ -1,0 +1,14 @@
+# Use hashtags for commenting
+# Only use 'ON' 'OFF' 'TMR' followed by a comma and a numeric value
+# TMR values are in milliseconds (1000 = 1 sec)
+# ON OFF values correspond with the relay number to turn on/ off
+
+# example.plc  
+ON,1  
+ON,2  
+TMR,1500  
+OFF,2  
+ON,3  
+TMR,300  
+OFF,3  
+OFF,1  
