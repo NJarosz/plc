@@ -71,18 +71,18 @@ Systemd for service management
 
 ## Setup
 
-Clone the Repository:
+### Clone the Repository:
 git clone https://github.com/yourusername/plc.git
 cd plc
 
 
-## Install Dependencies:
+### Install Dependencies:
 sudo pip3 install gpiozero python3-mfrc522
 
-## Set Up Systemd Service:
+### Set Up Systemd Service:
 sudo nano /etc/systemd/system/plc.service
 
-### Add:
+#### Add:
 [Unit]
 Description=PLC Control Service
 After=network.target
@@ -99,24 +99,24 @@ User=pi
 [Install]
 WantedBy=multi-user.target
 
-## Enable and start:
+#### Enable and start:
 sudo systemctl daemon-reload
 sudo systemctl enable plc.service
 sudo systemctl start plc.service
 
 
-## Set Up Log Rotation:
+### Set Up Log Rotation:
 chmod +x scripts/rotate_plc_logs.sh
 crontab -e
 
-### Add:
+#### Add:
 59 23 * * * /home/pi/plc/scripts/rotate_plc_logs.sh
 
 
-## Set Up Aliases (optional):
+### Set Up Aliases (optional):
 nano ~/.bashrc
 
-### Add:
+#### Add:
 alias plcstatus='sudo systemctl status plc.service'
 alias plcstart='sudo systemctl start plc.service'
 alias plcstop='sudo systemctl stop plc.service'
@@ -128,7 +128,7 @@ alias plcconfig='cd /home/pi/plc && python3 -m interface.json_config'
 ### Apply:
 source ~/.bashrc
 
-## Configure JSON Files:
+### Configure JSON Files:
 
 Copy the employee template:cp data/employees.json.template data/employees.json
 
@@ -139,27 +139,25 @@ Verify data/production.json (e.g., {"part": "ABC123", "mach": "M1", "count_goal"
 Verify data/total_count.json (e.g., {"count": 0}).
 
 
-# Usage
+## Usage
 
-Start PLC:plcstart
+### Start PLC:
+plcstart
 
+### Check Status/Logs:
 
-## Check Status/Logs:plcstatus
+plcstatus
 plclogs
 
-Follow prompts to edit employees.json, production.json, or total_count.json.
-
-
-## Run a Shot:
+### Run a Shot:
 In standby mode, scan an authorized RFID tag to enter run mode.
 Trigger a shot (via hardware sequence)—logs to data/csv/ and logs/plc.log.
 
-
-## Reload Config: 
+### Reload Config: 
 
 Edit production.json—auto-reloads within 60 seconds (see RELOAD_SECONDS).
 
-## Contributing
+### Contributing
 
 Fork the repository and create a pull request.
 Report issues via GitHub Issues.
