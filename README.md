@@ -58,7 +58,7 @@ plc/
 ├── .gitignore               # Excludes sensitive/transient files
 ├── __init__.py              # Makes plc/ a Python package
 ├── README.md                # Project documentation
-
+```
 ## Prerequisites
 
 Hardware: Raspberry Pi (e.g., pi Zero w) with Raspbian, LCD display, RC522 RFID reader, GPIO-connected relays/buttons.
