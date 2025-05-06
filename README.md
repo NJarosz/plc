@@ -140,7 +140,9 @@ Verify data/total_count.json (e.g., {"count": 0}).
 Create a file in /scripts/plc_programs/ with the suffix '.plc'  
 Use the keywords ['ON', 'OFF, 'TMR',] followed by a comma and a numeric value to create the desired sequence.
 
-For example:
+For example:  
+```plaintext
+# example.plc  
 ON,1  
 ON,2  
 TMR,1500  
@@ -149,7 +151,7 @@ ON,3
 TMR,300  
 OFF,3  
 OFF,1  
-
+```
 TMR values should be in milliseconds, and ON/OFF values correspond with the number of relays in your configuration (4 or 8).
 
 Save this file, and then point your main.plc file to this sequence.  
