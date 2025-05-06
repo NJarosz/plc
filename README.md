@@ -45,11 +45,16 @@ plc/
 │   ├── plc.log              # Active log (ignored by Git)
 │   ├── plc_YYYYMMDD.log     # Rotated logs (ignored by Git)
 │   ├── .gitkeep
-├── cli/                     # Command-line tools
+├── interface/                     # Command-line tools
 │   ├── __init__.py
 │   ├── plc_config.py        # CLI for editing JSON configs
+│   ├── gui.py               # GUI for updating sequences/ production variables
 ├── scripts/                 # Automation scripts
 │   ├── rotate_plc_logs.sh   # Daily log rotation
+│   ├── text_to_json.py      # Converts Text Files to Json
+│   ├── plc_programs/        # Files for plc sequences
+│   │   ├── main.plc         # Main plc sequence file
+│   │   ├── .gitkeep
 ├── .gitignore               # Excludes sensitive/transient files
 ├── __init__.py              # Makes plc/ a Python package
 ├── README.md                # Project documentation
