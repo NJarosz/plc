@@ -10,29 +10,49 @@ CLI Tool: Edit configurations via cli/plc_config.py.
 Systemd Integration: Runs as a service (plc.service) with auto-restart.
 Modular Design: Organized codebase with separate modules for hardware, file I/O, and UI.
 
+
 ## Directory Structure
-/plc/
-├── core/                 # Main application code
-│   ├── main.py           # Entry point
-│   ├── config.py         # Configuration variables
-│   ├── modules/          # Utility modules (file_io, hardware, ui, etc.)
-│   ├── modes/            # State machine modes (load, standby, run, etc.)
-│   ├── lib/              # External libraries (e.g., I2C_LCD_driver)
-├── data/                 # Configuration and data files
+```plaintext
+plc/
+├── core/                    # Main application code
+│   ├── main.py              # Entry point
+│   ├── config.py            # Configuration variables
+│   ├── modules/             # Utility modules
+│   │   ├── __init__.py
+│   │   ├── file_io.py
+│   │   ├── hardware.py
+│   │   ├── sequence.py
+│   │   ├── ui.py
+│   │   ├── utils.py
+│   ├── modes/               # State machine modes
+│   │   ├── __init__.py
+│   │   ├── load_mode.py
+│   │   ├── standby_mode.py
+│   │   ├── run_mode.py
+│   │   ├── menu_mode.py
+│   │   ├── error_mode.py
+│   ├── lib/                 # External libraries
+│   │   ├── __init__.py
+│   │   ├── I2C_LCD_driver.py
+├── data/                    # Configuration and data files
+│   ├── employees.json       # Employee list (ignored by Git)
 │   ├── employees.json.template  # Template for employee list
-│   ├── employees.json    # Actual employee list (ignored by Git)
-│   ├── production.json   # Production settings (part, machine, count goal)
-│   ├── total_count.json  # Total shot count
-│   ├── csv/              # Timestamped CSV logs
-├── logs/                 # Log files
-│   ├── plc.log           # Active log (ignored by Git)
-│   ├── plc_YYYYMMDD.log  # Rotated logs (ignored by Git)
-├── cli/                  # Command-line tools
-│   ├── plc_config.py     # CLI for editing JSON configs
-├── scripts/              # Automation scripts
-│   ├── rotate_plc_logs.sh  # Daily log rotation
-├── .gitignore            # Excludes sensitive/transient files
-├── README.md             # This file
+│   ├── production.json      # Production settings (part, machine, count goal)
+│   ├── total_count.json     # Total shot count
+│   ├── csv/                 # Timestamped CSV logs
+│   │   ├── .gitkeep
+├── logs/                    # Log files
+│   ├── plc.log              # Active log (ignored by Git)
+│   ├── plc_YYYYMMDD.log     # Rotated logs (ignored by Git)
+│   ├── .gitkeep
+├── cli/                     # Command-line tools
+│   ├── __init__.py
+│   ├── plc_config.py        # CLI for editing JSON configs
+├── scripts/                 # Automation scripts
+│   ├── rotate_plc_logs.sh   # Daily log rotation
+├── .gitignore               # Excludes sensitive/transient files
+├── __init__.py              # Makes plc/ a Python package
+├── README.md                # Project documentation
 
 ## Prerequisites
 
