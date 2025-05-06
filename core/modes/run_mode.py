@@ -46,6 +46,7 @@ def run_run_mode(ui, hw, state, triggers):
             ui.clear()
             ui.message("Count Reached", 1)
             ui.message("Press Red Btn", 2)
+            logger.info(f"COUNT REACHED ({state['counter_stop_point']}): {state['emp_num']} ({state['emp_name']})")
             hw.button_1.wait_for_press()
             hw.button_1.wait_for_release()
             return MODES["standby"], state
@@ -53,12 +54,14 @@ def run_run_mode(ui, hw, state, triggers):
         if datetime.now() >= last_shot_run_time + timedelta(seconds=TIMEOUT_SECONDS):
             add_timestamp("TIME_OUT", state["file_path"], PI_NUM, state["mach_num"], state["part_num"], state["emp_num"])
             ui.message("Timed Out", 1, 5)
+            logger.info(f"TIME-OUT: {state['emp_num']} ({state['emp_name']})")
             return MODES["standby"], state
 
         if hw.button_1.is_pressed:
             hw.button_1.wait_for_release()
             add_timestamp("LOG_OFF", state["file_path"], PI_NUM, state["mach_num"], state["part_num"], state["emp_num"])
             ui.message("Logged Out", 1, 1)
+            logger.info(f"LOG-OFF: {state['emp_num']} ({state['emp_name']})")
             return MODES["standby"], state
 
     return MODES["standby"], state  # Fallback, though loop typically exits via conditions

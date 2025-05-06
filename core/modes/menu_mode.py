@@ -1,6 +1,9 @@
 from modules.utils import handle_error
 from modules.file_io import update_total_count
 from config import MODES
+import logging
+
+logger = logging.getLogger(__name__)
 
 def run_menu_mode(ui, hw, state):
     """
@@ -15,6 +18,7 @@ def run_menu_mode(ui, hw, state):
             hw.button_2.wait_for_release()
             state["total_count"] = 0
             update_total_count(state["total_count"])
+            logger.info("TOTAL COUNT RESET")
             ui.message("Counter= 0", 1, 3)
             return MODES["standby"], state
         if hw.button_1.is_pressed:
