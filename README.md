@@ -62,12 +62,9 @@ plc/
 ## Prerequisites
 
 Hardware: Raspberry Pi (e.g., pi Zero w) with Raspbian, LCD display, RC522 RFID reader, GPIO-connected relays/buttons.
-Software:
-Python 3.7+
+Software: Python 3.7+
 Dependencies: pip3 install gpiozero python3-mfrc522
 Systemd for service management
-
-
 
 ## Setup
 
