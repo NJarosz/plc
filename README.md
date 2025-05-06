@@ -135,6 +135,26 @@ Edit data/employees.json (e.g., {"123": "John"}).
 Verify data/production.json (e.g., {"part": "ABC123", "mach": "M1", "count_goal": 10}).  
 Verify data/total_count.json (e.g., {"count": 0}).  
 
+### Configure PLC Sequence Files:
+
+Create a file in /scripts/plc_programs/ with the suffix '.plc'  
+Use the keywords ['ON', 'OFF, 'TMR',] followed by a comma and a numeric value to create the desired sequence.
+
+For example:
+ON,1  
+ON,2  
+TMR,1500  
+OFF,2  
+ON,3  
+TMR,300  
+OFF,3  
+OFF,1  
+
+TMR values should be in milliseconds, and ON/OFF values correspond with the number of relays in your configuration (4 or 8).
+
+Save this file, and then point your main.plc file to this sequence.  
+(The only text in your main.plc file should be the name of the sequence file you want to run, i.e example.plc)  
+
 
 ## Usage
 
@@ -153,7 +173,7 @@ Trigger a shot (via hardware sequence)—logs to data/csv/ and logs/plc.log.
 ### Reload Config: 
 
 Edit production.json—auto-reloads within 60 seconds (see RELOAD_SECONDS).  
-
+ 
 ### Contributing
 
 Fork the repository and create a pull request.  
