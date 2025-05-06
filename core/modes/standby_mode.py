@@ -73,9 +73,12 @@ def run_standby_mode(ui, hw, state, triggers):
             button_press_time = datetime.now()
             hw.button_2.wait_for_release()
             if datetime.now() >= button_press_time + timedelta(seconds=CARD_WRITE_HOLD_SECONDS):
+                logger.info("Card Write Mode Initialized")
                 write_card(hw, ui)
+                logger.info("Reload initialized")
                 exit_and_reload(ui)
             elif datetime.now() >= button_press_time + timedelta(seconds=LOAD_BUTTON_HOLD_SECONDS):
+                logger.info("Reload initialzied")
                 exit_and_reload(ui)
             else:
                 try:
