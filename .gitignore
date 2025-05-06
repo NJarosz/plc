@@ -10,7 +10,8 @@ data/csv/*
 # PLC Programs
 scripts/plc_programs/*
 !scripts/plc_programs/.gitkeep
-!scripts/plc/programs/main.plc
+!scripts/plc_programs/main.plc
+!scripts/plc_programs/example.plc
 
 # Python artifacts
 __pycache__/
