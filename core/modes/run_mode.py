@@ -4,6 +4,9 @@ from modules.sequence import run_sequence
 from modules.file_io import add_timestamp, update_total_count
 from modules.utils import handle_error
 from config import MODES, PI_NUM, SEQUENCE_DEBOUNCE_SECONDS, TIMEOUT_SECONDS
+import logging
+
+logger = logging.getLogger(__name__)
 
 def run_run_mode(ui, hw, state, triggers):
     """
@@ -36,7 +39,7 @@ def run_run_mode(ui, hw, state, triggers):
             if triggers == "2" and hw.trigger_2.is_pressed:
                 hw.trigger_2.wait_for_release()
 
-        if state["counter_stop_point"] > 0 & state["total_count"] >= state["counter_stop_point"]:
+        if state["counter_stop_point"] > 0 and state["total_count"] >= state["counter_stop_point"]:
             add_timestamp("LOG_OFF", state["file_path"], PI_NUM, state["mach_num"], state["part_num"], state["emp_num"])
             state["total_count"] = 0
             update_total_count(state["total_count"])
