@@ -1,0 +1,29 @@
+# Logs
+logs/*
+!logs/.gitkeep
+
+# Data files with sensitive or transient data
+data/employees.json
+data/csv/*
+!data/csv/.gitkeep
+
+# PLC Programs
+scripts/plc_programs/*
+!scripts/plc_programs/.gitkeep
+!scripts/plc/programs/main.plc
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.swp
+*~
+
+# System files
+.DS_Store
+Thumbs.db
